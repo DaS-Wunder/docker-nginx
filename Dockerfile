@@ -39,26 +39,22 @@ RUN apk add --no-cache \
         php7-fpm && \
 
 # Build nginx
-    mkdir -p /tmp/src && \
-    cd /tmp/src && \
-    wget -q "http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" && \
-    wget -q "https://raw.githubusercontent.com/senuphtyz/nginx-dav-ext-module/master/config" && \
-    wget -q "https://raw.githubusercontent.com/arut/nginx-dav-ext-module/master/ngx_http_dav_ext_module.c" && \
-    tar zxf nginx-${NGINX_VERSION}.tar.gz && \
-    cd /tmp/src/nginx-${NGINX_VERSION} && \
+    wget -qO /tmp/nginx.tar.gz "http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" && \
+    wget -qO /tmp/config "https://raw.githubusercontent.com/senuphtyz/nginx-dav-ext-module/master/config" && \
+    wget -qO /tmp/ngx_http_dav_ext_module.c "https://raw.githubusercontent.com/arut/nginx-dav-ext-module/master/ngx_http_dav_ext_module.c" && \
+    tar zxf /tmp/nginx.tar.gz -C /tmp && \
+    cd /tmp/nginx-${NGINX_VERSION} && \
     ./configure \
         --with-http_ssl_module \
         --with-http_gzip_static_module \
         --prefix=/etc/nginx \
-        --http-log-path=/var/log/nginx/access.log \
-        --error-log-path=/var/log/nginx/error.log \
+        --http-log-path=/dev/stdout \
+        --error-log-path=/dev/stderr \
         --sbin-path=/usr/local/sbin/nginx \
         --with-http_dav_module \
-        --add-module=/tmp/src && \
+        --add-module=/tmp && \
     make && \
     make install && \
-    ln -sf /dev/stdout /var/log/nginx/access.log && \
-    ln -sf /dev/stderr /var/log/nginx/error.log && \
 
 # Cleanup
     apk del --purge build-dependencies && \
