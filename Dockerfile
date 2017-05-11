@@ -25,7 +25,7 @@ RUN apk add --no-cache \
         zlib-dev && \
 
 # Add S6 overlay
-    wget -O /tmp/s6-overlay.tar.gz "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz" && \
+    wget -qO /tmp/s6-overlay.tar.gz "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz" && \
     tar xfz /tmp/s6-overlay.tar.gz -C / && \
 
 # Create user
@@ -41,9 +41,9 @@ RUN apk add --no-cache \
 # Build nginx
     mkdir -p /tmp/src && \
     cd /tmp/src && \
-    wget "http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" && \
-    wget "https://raw.githubusercontent.com/senuphtyz/nginx-dav-ext-module/master/config" && \
-    wget "https://raw.githubusercontent.com/arut/nginx-dav-ext-module/master/ngx_http_dav_ext_module.c" && \
+    wget -q "http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" && \
+    wget -q "https://raw.githubusercontent.com/senuphtyz/nginx-dav-ext-module/master/config" && \
+    wget -q "https://raw.githubusercontent.com/arut/nginx-dav-ext-module/master/ngx_http_dav_ext_module.c" && \
     tar zxf nginx-${NGINX_VERSION}.tar.gz && \
     cd /tmp/src/nginx-${NGINX_VERSION} && \
     ./configure \
