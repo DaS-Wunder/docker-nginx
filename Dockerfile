@@ -1,9 +1,6 @@
-FROM alpine:3.5
+FROM alpine:3.6
 
-ARG S6_OVERLAY_VERSION="1.19.1.1"
-ARG NGINX_VERSION="1.11.8"
-
-COPY root/ /
+ARG NGINX_VERSION="1.12.0"
 
 # Install core packages
 RUN apk add --no-cache \
@@ -24,19 +21,13 @@ RUN apk add --no-cache \
         wget \
         zlib-dev && \
 
-# Add S6 overlay
-    wget -qO /tmp/s6-overlay.tar.gz "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz" && \
-    tar xfz /tmp/s6-overlay.tar.gz -C / && \
-
 # Create user
     adduser -D -S -u 99 -G users -s /sbin/nologin duser && \
 
 # Install runtime packages
     apk add --no-cache \
         expat \
-        pcre \
-        php7-curl \
-        php7-fpm && \
+        pcre && \
 
 # Build nginx
     wget -qO /tmp/nginx.tar.gz "http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" && \
@@ -60,4 +51,6 @@ RUN apk add --no-cache \
     apk del --purge build-dependencies && \
     rm -rf /tmp/*
 
-ENTRYPOINT /init
+COPY ./docker-entrypoint.sh /
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
