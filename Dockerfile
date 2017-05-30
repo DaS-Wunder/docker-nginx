@@ -53,6 +53,7 @@ RUN apk add --no-cache \
     apk del --purge build-dependencies && \
     rm -rf /tmp/* &&\
 
-chmod +x /docker-entrypoint.sh
+# Set file permissions
+    chmod +x /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
