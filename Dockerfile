@@ -1,6 +1,6 @@
 FROM alpine:3.6
 
-COPY ./docker-entrypoint.sh /
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 
 ARG NGINX_VERSION="1.12.0"
 
@@ -53,6 +53,6 @@ RUN apk add --no-cache \
     apk del --purge build-dependencies && \
     rm -rf /tmp/* &&\
 
-chmod +x docker-entrypoint.sh
+chmod +x /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
