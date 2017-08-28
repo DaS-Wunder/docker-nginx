@@ -24,7 +24,7 @@ RUN apk add --no-cache \
         zlib-dev && \
 
 # Create user
-    adduser -D -S -u 99 -G users -s /sbin/nologin duser && \
+    adduser -D -S -u 911 -G users -s /sbin/nologin abc && \
 
 # Install runtime packages
     apk add --no-cache \
