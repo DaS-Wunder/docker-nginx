@@ -2,7 +2,7 @@ FROM alpine:3.6
 
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 
-ARG NGINX_VERSION="1.12.0"
+ARG NGINX_VERSION="1.12.1"
 
 # Install core packages
 RUN apk add --no-cache \
