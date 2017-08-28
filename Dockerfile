@@ -8,6 +8,7 @@ ARG NGINX_VERSION="1.12.1"
 RUN apk add --no-cache \
         ca-certificates \
         coreutils \
+        shadow \
         tzdata && \
 
 # Install build packages
@@ -24,7 +25,8 @@ RUN apk add --no-cache \
         zlib-dev && \
 
 # Create user
-    adduser -D -S -u 911 -G users -s /sbin/nologin abc && \
+    useradd -u 911 -U -d /config -s /bin/false abc && \
+    usermod -G users abc && \
 
 # Install runtime packages
     apk add --no-cache \
