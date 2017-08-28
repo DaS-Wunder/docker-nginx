@@ -5,6 +5,7 @@ set -e
 PUID=${PUID:-911}
 PGID=${PGID:-911}
 
+# Set permissions
 groupmod -o -g "$PGID" abc
 usermod -o -u "$PUID" abc
 chown abc:abc /config
