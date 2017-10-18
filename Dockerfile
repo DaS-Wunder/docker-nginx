@@ -43,7 +43,6 @@ RUN apk add --no-cache \
         --with-http_ssl_module \
         --with-http_gzip_static_module \
         --with-http_v2_module \
-        --with-http_geoip_module \
         --prefix=/etc/nginx \
         --http-log-path=/dev/stdout \
         --error-log-path=/dev/stderr \
