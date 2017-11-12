@@ -2,7 +2,7 @@ FROM alpine:3.6
 
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 
-ARG NGINX_VERSION="1.12.1"
+ARG NGINX_VERSION="1.12.2"
 
 # Install core packages
 RUN apk add --no-cache \
@@ -25,8 +25,8 @@ RUN apk add --no-cache \
         zlib-dev && \
 
 # Create user
-  #  useradd -r -u 911 -U -d /config -s /bin/false abc && \
-  #  usermod -G users abc && \
+    useradd -r -u 911 -m -s /bin/false nginx && \
+    usermod -G users nginx && \
 
 # Install runtime packages
     apk add --no-cache \
