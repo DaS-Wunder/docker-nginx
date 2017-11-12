@@ -9,4 +9,4 @@ PGID=${PGID:-911}
 groupmod -o -g "$PGID" nginx
 usermod -o -u "$PUID" nginx
 
-exec nginx -c /etc/nginx.conf -g "daemon off;"
+exec nginx -c /etc/nginx/nginx.conf -g "daemon off;"
