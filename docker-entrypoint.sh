@@ -6,8 +6,7 @@ PUID=${PUID:-911}
 PGID=${PGID:-911}
 
 # Set permissions
-groupmod -o -g "$PGID" abc
-usermod -o -u "$PUID" abc
-chown abc:abc /config
+groupmod -o -g "$PGID" nginx
+usermod -o -u "$PUID" nginx
 
-exec nginx -c /config/nginx.conf -g "daemon off;"
+exec nginx -c /etc/nginx.conf -g "daemon off;"
