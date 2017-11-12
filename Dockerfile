@@ -25,8 +25,8 @@ RUN apk add --no-cache \
         zlib-dev && \
 
 # Create user
-    useradd -r -u 911 -U -d /config -s /bin/false abc && \
-    usermod -G users abc && \
+  #  useradd -r -u 911 -U -d /config -s /bin/false abc && \
+  #  usermod -G users abc && \
 
 # Install runtime packages
     apk add --no-cache \
